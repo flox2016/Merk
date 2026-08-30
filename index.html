@@ -463,9 +463,14 @@ function abrirDetalle(p){
 }
 
 $("btnComprar").addEventListener("click", ()=>{
-  if (!productoActual) return;
+  if (!productoActual){
+    console.warn("btnComprar: no hay productoActual seteado");
+    return;
+  }
   const texto = encodeURIComponent(`Te quiero comprar este producto ${productoActual.nombre}`);
-  window.open(`https://wa.me/${WHATSAPP_NUMERO}?text=${texto}`, "_blank");
+  const url = `https://wa.me/${WHATSAPP_NUMERO}?text=${texto}`;
+  console.log("Abriendo WhatsApp:", url);
+  window.location.href = url;
 });
 
 $("btnEditarProducto").addEventListener("click", ()=>{
