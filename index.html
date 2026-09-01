@@ -436,57 +436,76 @@
     <button class="close-x" data-close="overlayPanel">&times;</button>
     <h3 class="display">Panel de la tienda</h3>
 
-    <label>Nombre de la tienda</label>
-    <input type="text" id="cNombreTienda">
-
-    <label>Logo</label>
-    <input type="text" id="cLogoUrl" placeholder="https://... (dejalo vacío para usar el logo por defecto)">
-    <button type="button" class="pill-btn ghost" id="btnSubirLogo" style="margin-top:10px;">📷 Subir foto del logo desde el celular</button>
-    <input type="file" id="cLogoFotoInput" accept="image/*" style="display:none;">
-    <div class="msg" id="logoUploadMsg"></div>
-    <div class="rango-row" style="margin-top:12px;">
-      <span style="min-width:120px; text-align:left; font-weight:600;">Tamaño del logo</span>
-      <input type="range" id="cLogoSize" min="30" max="160" value="70">
-      <span id="cLogoSizeValor">70px</span>
-    </div>
-
-    <label>Color principal <button type="button" class="gear-btn" id="btnGear" title="Elegir color">⚙</button></label>
-    <div class="paleta-toggle-row">
-      <span class="color-preview-actual" id="colorPreviewActual"></span>
-      <span id="colorPreviewNombre" style="color:var(--muted);"></span>
-    </div>
-    <div class="swatches" id="paletaPrincipal" style="display:none; margin-top:12px;"></div>
-
-    <button class="pill-btn" id="btnGuardarConfig" style="width:100%; margin-top:20px;">Guardar ajustes</button>
-    <div class="msg" id="configMsg"></div>
-
-    <hr class="seam" style="margin:26px 0;">
-
-    <h3 class="display" style="margin:0 0 12px;">Seguridad (PINs)</h3>
-
-    <label>Cambiar PIN del Panel</label>
-    <div class="row">
-      <input type="text" inputmode="numeric" id="pinPanelActual" placeholder="PIN actual" style="flex:1;">
-      <input type="text" inputmode="numeric" id="pinPanelNuevo" placeholder="PIN nuevo" style="flex:1;">
-    </div>
-    <button class="pill-btn ghost" id="btnCambiarPinPanel" style="margin-top:10px;">Cambiar PIN del Panel</button>
-    <div class="msg" id="pinPanelMsg"></div>
-
-    <label style="margin-top:22px;">Cambiar PIN de editar producto</label>
-    <div class="row">
-      <input type="text" inputmode="numeric" id="pinProductoActual" placeholder="PIN actual" style="flex:1;">
-      <input type="text" inputmode="numeric" id="pinProductoNuevo" placeholder="PIN nuevo" style="flex:1;">
-    </div>
-    <button class="pill-btn ghost" id="btnCambiarPinProducto" style="margin-top:10px;">Cambiar PIN de editar producto</button>
-    <div class="msg" id="pinProductoMsg"></div>
-
-    <hr class="seam" style="margin:26px 0;">
-
-    <div class="row" style="justify-content:space-between;">
+    <div class="row" style="justify-content:space-between; align-items:center; margin-top:10px;">
       <h3 class="display" style="margin:0;">Productos</h3>
       <button class="pill-btn ghost" id="btnNuevoProducto">+ Nuevo producto</button>
     </div>
-    <div id="listaProductosAdmin" style="margin-top:12px;"></div>
+    <div id="listaProductosAdmin" style="margin-top:14px;"></div>
+
+    <hr class="seam" style="margin:28px 0;">
+
+    <button type="button" class="pill-btn ghost" id="btnToggleAjustes" style="width:100%;">⚙ Ajustes de la tienda</button>
+
+    <div id="bloqueAjustes" style="display:none; margin-top:20px;">
+      <label>Nombre de la tienda</label>
+      <input type="text" id="cNombreTienda">
+
+      <label>Logo</label>
+      <input type="text" id="cLogoUrl" placeholder="https://... (dejalo vacío para usar el logo por defecto)">
+      <button type="button" class="pill-btn ghost" id="btnSubirLogo" style="margin-top:10px;">📷 Subir foto del logo desde el celular</button>
+      <input type="file" id="cLogoFotoInput" accept="image/*" style="display:none;">
+      <div class="msg" id="logoUploadMsg"></div>
+      <div class="rango-row" style="margin-top:12px;">
+        <span style="min-width:120px; text-align:left; font-weight:600;">Tamaño del logo</span>
+        <input type="range" id="cLogoSize" min="30" max="160" value="70">
+        <span id="cLogoSizeValor">70px</span>
+      </div>
+
+      <label>Color principal <button type="button" class="gear-btn" id="btnGear" title="Elegir color">⚙</button></label>
+      <div class="paleta-toggle-row">
+        <span class="color-preview-actual" id="colorPreviewActual"></span>
+        <span id="colorPreviewNombre" style="color:var(--muted);"></span>
+      </div>
+      <div class="swatches" id="paletaPrincipal" style="display:none; margin-top:12px;"></div>
+
+      <button class="pill-btn" id="btnGuardarConfig" style="width:100%; margin-top:20px;">Guardar ajustes</button>
+      <div class="msg" id="configMsg"></div>
+
+      <hr class="seam" style="margin:26px 0;">
+
+      <h3 class="display" style="margin:0 0 12px;">Seguridad</h3>
+
+      <label>Cambiar PIN del Panel</label>
+      <div class="row">
+        <input type="text" inputmode="numeric" id="pinPanelActual" placeholder="PIN actual" style="flex:1;">
+        <input type="text" inputmode="numeric" id="pinPanelNuevo" placeholder="PIN nuevo" style="flex:1;">
+      </div>
+      <button class="pill-btn ghost" id="btnCambiarPinPanel" style="margin-top:10px;">Cambiar PIN del Panel</button>
+      <div class="msg" id="pinPanelMsg"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal ajustar/recortar foto -->
+<div class="overlay" id="overlayCrop">
+  <div class="modal admin-modal" style="max-width:380px; text-align:center;">
+    <button class="close-x" id="cropCancelX">&times;</button>
+    <h3 class="display">Ajustá la foto</h3>
+    <div class="msg" id="cropContador" style="margin-bottom:8px;"></div>
+    <canvas id="cropCanvas" width="300" height="300" style="border-radius:10px; border:2px solid var(--line); touch-action:none; cursor:grab; max-width:100%; background:#e4e4e4;"></canvas>
+    <div class="row" style="justify-content:center; margin-top:14px;">
+      <button type="button" class="icon-btn" id="cropRotarIzq">↺ Rotar</button>
+      <button type="button" class="icon-btn" id="cropRotarDer">↻ Rotar</button>
+    </div>
+    <div class="rango-row" style="margin-top:14px;">
+      <span>Zoom</span>
+      <input type="range" id="cropZoomInput" min="1" max="3" step="0.05" value="1">
+    </div>
+    <p style="color:var(--muted); font-size:0.85em; margin-top:10px;">Arrastrá la foto con el dedo o el mouse para ubicarla dentro del cuadro.</p>
+    <div class="row" style="margin-top:18px;">
+      <button class="pill-btn ghost" id="cropCancelar" style="flex:1;">Cancelar</button>
+      <button class="pill-btn" id="cropConfirmar" style="flex:1;">Usar esta foto</button>
+    </div>
   </div>
 </div>
 
@@ -519,12 +538,131 @@ let categoriaActual = "inicio";
 let productoActual = null;
 let colorSeleccionado = null; // indice dentro de productoActual.colores, o null = fotos generales
 let pinCallback = null;
-let pinContexto = "panel"; // "panel" | "producto"
 let productoEditando = null;
 let fotosEditando = [];
 let coloresEditando = []; // [{nombre, hex, fotos:[]}]
 let carrito = []; // [{id, nombre, precio, qty, foto}]
 let colorPrincipalSeleccionado = "#E15A38";
+
+// ---------- Recortador de fotos (rotar + zoom + arrastrar) ----------
+let cropImg = null;
+let cropRotation = 0;
+let cropZoom = 1;
+let cropOffsetX = 0;
+let cropOffsetY = 0;
+let cropResolve = null;
+let cropDragging = false;
+let cropStartX = 0, cropStartY = 0, cropStartOffsetX = 0, cropStartOffsetY = 0;
+const CROP_VIEWPORT = 300;
+const CROP_OUTPUT = 900;
+
+function cropCoverScale(imgW, imgH, rotation, viewport){
+  const efW = (rotation===90 || rotation===270) ? imgH : imgW;
+  const efH = (rotation===90 || rotation===270) ? imgW : imgH;
+  return Math.max(viewport/efW, viewport/efH);
+}
+
+function dibujarCrop(){
+  const canvas = $("cropCanvas");
+  const ctx = canvas.getContext("2d");
+  ctx.clearRect(0,0,CROP_VIEWPORT,CROP_VIEWPORT);
+  ctx.save();
+  ctx.translate(CROP_VIEWPORT/2 + cropOffsetX, CROP_VIEWPORT/2 + cropOffsetY);
+  ctx.rotate(cropRotation * Math.PI/180);
+  const cs = cropCoverScale(cropImg.width, cropImg.height, cropRotation, CROP_VIEWPORT) * cropZoom;
+  ctx.scale(cs, cs);
+  ctx.drawImage(cropImg, -cropImg.width/2, -cropImg.height/2);
+  ctx.restore();
+}
+
+function abrirRecortador(file, num, total){
+  return new Promise((resolve)=>{
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = ()=>{
+      cropImg = img;
+      cropRotation = 0;
+      cropZoom = 1;
+      cropOffsetX = 0;
+      cropOffsetY = 0;
+      cropResolve = (blob)=>{ URL.revokeObjectURL(url); resolve(blob); };
+      $("cropContador").textContent = (num && total && total>1) ? `Foto ${num} de ${total}` : "";
+      $("cropZoomInput").value = 1;
+      dibujarCrop();
+      open("overlayCrop");
+    };
+    img.onerror = ()=>{ URL.revokeObjectURL(url); resolve(null); };
+    img.src = url;
+  });
+}
+
+function cancelarCrop(){
+  if (cropResolve){
+    const r = cropResolve;
+    cropResolve = null;
+    close("overlayCrop");
+    r(null);
+  }
+}
+
+$("cropCancelar").addEventListener("click", cancelarCrop);
+$("cropCancelX").addEventListener("click", cancelarCrop);
+
+$("cropRotarIzq").addEventListener("click", ()=>{
+  cropRotation = (cropRotation - 90 + 360) % 360;
+  cropZoom = 1; cropOffsetX = 0; cropOffsetY = 0;
+  $("cropZoomInput").value = 1;
+  dibujarCrop();
+});
+$("cropRotarDer").addEventListener("click", ()=>{
+  cropRotation = (cropRotation + 90) % 360;
+  cropZoom = 1; cropOffsetX = 0; cropOffsetY = 0;
+  $("cropZoomInput").value = 1;
+  dibujarCrop();
+});
+$("cropZoomInput").addEventListener("input", ()=>{
+  cropZoom = Number($("cropZoomInput").value);
+  dibujarCrop();
+});
+
+(function(){
+  const canvas = $("cropCanvas");
+  canvas.addEventListener("pointerdown", e=>{
+    cropDragging = true;
+    cropStartX = e.clientX; cropStartY = e.clientY;
+    cropStartOffsetX = cropOffsetX; cropStartOffsetY = cropOffsetY;
+    canvas.setPointerCapture(e.pointerId);
+    canvas.style.cursor = "grabbing";
+  });
+  canvas.addEventListener("pointermove", e=>{
+    if (!cropDragging) return;
+    cropOffsetX = cropStartOffsetX + (e.clientX - cropStartX);
+    cropOffsetY = cropStartOffsetY + (e.clientY - cropStartY);
+    dibujarCrop();
+  });
+  canvas.addEventListener("pointerup", ()=>{ cropDragging = false; canvas.style.cursor = "grab"; });
+  canvas.addEventListener("pointercancel", ()=>{ cropDragging = false; canvas.style.cursor = "grab"; });
+})();
+
+$("cropConfirmar").addEventListener("click", ()=>{
+  const factor = CROP_OUTPUT / CROP_VIEWPORT;
+  const out = document.createElement("canvas");
+  out.width = CROP_OUTPUT; out.height = CROP_OUTPUT;
+  const ctx = out.getContext("2d");
+  ctx.save();
+  ctx.translate(CROP_OUTPUT/2 + cropOffsetX*factor, CROP_OUTPUT/2 + cropOffsetY*factor);
+  ctx.rotate(cropRotation * Math.PI/180);
+  const cs = cropCoverScale(cropImg.width, cropImg.height, cropRotation, CROP_VIEWPORT) * cropZoom * factor;
+  ctx.scale(cs, cs);
+  ctx.drawImage(cropImg, -cropImg.width/2, -cropImg.height/2);
+  ctx.restore();
+  out.toBlob((blob)=>{
+    const r = cropResolve;
+    cropResolve = null;
+    close("overlayCrop");
+    if (r) r(blob);
+  }, "image/jpeg", 0.9);
+});
 
 // ---------- Helpers ----------
 function $(id){ return document.getElementById(id); }
@@ -568,6 +706,11 @@ function aplicarConfigVisual(){
   actualizarPreviewColor();
   renderPaletaPrincipal();
 }
+
+$("btnToggleAjustes").addEventListener("click", ()=>{
+  const el = $("bloqueAjustes");
+  el.style.display = el.style.display === "none" ? "block" : "none";
+});
 
 $("cLogoSize").addEventListener("input", ()=>{
   $("cLogoSizeValor").textContent = $("cLogoSize").value + "px";
@@ -757,7 +900,7 @@ $("btnEditarProducto").addEventListener("click", ()=>{
   pedirPin(()=>{
     close("overlayDetalle");
     abrirEditor(productoActual);
-  }, "producto");
+  });
 });
 
 // ---------- Carrito ----------
@@ -804,9 +947,8 @@ $("btnComprarTodo").addEventListener("click", ()=>{
 });
 
 // ---------- PIN ----------
-function pedirPin(callback, contexto){
+function pedirPin(callback){
   pinCallback = callback;
-  pinContexto = contexto || "panel";
   $("pinInput").value = "";
   $("pinMsg").textContent = "";
   open("overlayPin");
@@ -815,8 +957,7 @@ function pedirPin(callback, contexto){
 $("btnPinOk").addEventListener("click", verificarPin);
 $("pinInput").addEventListener("keydown", e=>{ if(e.key==="Enter") verificarPin(); });
 function verificarPin(){
-  const esperado = pinContexto === "producto" ? config.pin_producto : config.pin_panel;
-  if ($("pinInput").value.trim() === esperado){
+  if ($("pinInput").value.trim() === config.pin_panel){
     close("overlayPin");
     const cb = pinCallback;
     pinCallback = null;
@@ -830,7 +971,7 @@ $("btnPanel").addEventListener("click", ()=>{
   pedirPin(()=>{
     renderListaProductosAdmin();
     open("overlayPanel");
-  }, "panel");
+  });
 });
 
 // ---------- Editor de producto ----------
@@ -871,11 +1012,14 @@ $("fFotoInput").addEventListener("change", async (e)=>{
 async function subirFotos(files, arrayDestino, callbackRender){
   const lista = Array.from(files || []);
   if (!lista.length) return;
-  $("editarMsg").textContent = "Subiendo fotos...";
-  $("editarMsg").className = "msg";
-  for (const file of lista){
-    const path = `${Date.now()}_${Math.random().toString(36).slice(2)}_${file.name}`;
-    const { error: upErr } = await sb.storage.from(BUCKET).upload(path, file);
+  for (let i=0; i<lista.length; i++){
+    const file = lista[i];
+    const blob = await abrirRecortador(file, i+1, lista.length);
+    if (!blob) continue; // el usuario canceló esta foto puntual
+    $("editarMsg").textContent = "Subiendo foto...";
+    $("editarMsg").className = "msg";
+    const path = `${Date.now()}_${Math.random().toString(36).slice(2)}.jpg`;
+    const { error: upErr } = await sb.storage.from(BUCKET).upload(path, blob, { contentType: "image/jpeg" });
     if (upErr){
       $("editarMsg").textContent = "Error subiendo foto: " + upErr.message;
       $("editarMsg").className = "msg err";
@@ -883,9 +1027,9 @@ async function subirFotos(files, arrayDestino, callbackRender){
     }
     const { data } = sb.storage.from(BUCKET).getPublicUrl(path);
     arrayDestino.push(data.publicUrl);
+    callbackRender();
   }
   $("editarMsg").textContent = "";
-  callbackRender();
 }
 
 // ---------- Colores del producto (editor) ----------
@@ -995,10 +1139,13 @@ $("btnSubirLogo").addEventListener("click", ()=>{
 $("cLogoFotoInput").addEventListener("change", async (e)=>{
   const file = e.target.files[0];
   if (!file) return;
+  const blob = await abrirRecortador(file);
+  e.target.value = "";
+  if (!blob) return;
   $("logoUploadMsg").textContent = "Subiendo logo...";
   $("logoUploadMsg").className = "msg";
-  const path = `logo_${Date.now()}_${file.name}`;
-  const { error: upErr } = await sb.storage.from(BUCKET).upload(path, file);
+  const path = `logo_${Date.now()}.jpg`;
+  const { error: upErr } = await sb.storage.from(BUCKET).upload(path, blob, { contentType: "image/jpeg" });
   if (upErr){
     $("logoUploadMsg").textContent = "Error subiendo el logo: " + upErr.message;
     $("logoUploadMsg").className = "msg err";
@@ -1009,7 +1156,6 @@ $("cLogoFotoInput").addEventListener("change", async (e)=>{
   $("headerLogo").src = data.publicUrl;
   $("logoUploadMsg").textContent = "Listo, ahora tocá \"Guardar ajustes\" para dejarlo fijo.";
   $("logoUploadMsg").className = "msg ok";
-  e.target.value = "";
 });
 
 $("btnGuardarConfig").addEventListener("click", async ()=>{
@@ -1053,31 +1199,6 @@ $("btnCambiarPinPanel").addEventListener("click", async ()=>{
   $("pinPanelActual").value = ""; $("pinPanelNuevo").value = "";
   $("pinPanelMsg").textContent = "PIN del Panel actualizado.";
   $("pinPanelMsg").className = "msg ok";
-});
-
-$("btnCambiarPinProducto").addEventListener("click", async ()=>{
-  const actual = $("pinProductoActual").value.trim();
-  const nuevo = $("pinProductoNuevo").value.trim();
-  if (actual !== config.pin_producto){
-    $("pinProductoMsg").textContent = "El PIN actual no coincide.";
-    $("pinProductoMsg").className = "msg err";
-    return;
-  }
-  if (!nuevo){
-    $("pinProductoMsg").textContent = "Poné el PIN nuevo.";
-    $("pinProductoMsg").className = "msg err";
-    return;
-  }
-  const { error } = await sb.from("ropa_config").update({ pin_producto: nuevo }).eq("id",1);
-  if (error){
-    $("pinProductoMsg").textContent = "Error: " + error.message;
-    $("pinProductoMsg").className = "msg err";
-    return;
-  }
-  config.pin_producto = nuevo;
-  $("pinProductoActual").value = ""; $("pinProductoNuevo").value = "";
-  $("pinProductoMsg").textContent = "PIN de editar producto actualizado.";
-  $("pinProductoMsg").className = "msg ok";
 });
 
 $("btnNuevoProducto").addEventListener("click", ()=> abrirEditor(null));
